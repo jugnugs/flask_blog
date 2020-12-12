@@ -8,6 +8,7 @@ authors = ["Julia <julialn.sunni@gmail.com>"]
 python = "^3.6"
 Flask = "^1.1.2"
 python-dotenv = "^0.15.0"
+Flask-WTF = "^0.14.3"
 
 [tool.poetry.dev-dependencies]
 
