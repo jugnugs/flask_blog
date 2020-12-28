@@ -3,7 +3,7 @@ from werkzeug.urls import url_parse
 from datetime import datetime
 from flask_login import current_user, login_user, logout_user, login_required
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, Post Form, EmptyForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, EmptyForm
 from app.models import User, Post
 
 @app.before_request
@@ -25,6 +25,12 @@ def index():
     return redirect(url_for('index'))
   posts = current_user.followed_posts().all()
   return render_template('index.html', title='Home', form=form, posts=posts)
+
+@app.route('/explore')
+@login_required
+def explore():
+  posts = Post.query.order_by(Post.timestamp.desc()).all()
+  return render_template('index.html', title='Explore', posts=posts)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
